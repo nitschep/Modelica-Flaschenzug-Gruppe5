@@ -1,0 +1,29 @@
+model Rolle_parametrierbar
+Projekt_Flaschenzug.Fs_connector fs_connector1 annotation(
+    Placement(visible = true, transformation(origin = {-52, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-48, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+Projekt_Flaschenzug.Fs_connector fs_connector2 annotation(
+    Placement(visible = true, transformation(origin = {50, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {48, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+Projekt_Flaschenzug.Fs_connector fs_connector3 annotation(
+    Placement(visible = true, transformation(origin = {-2, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {2, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+
+parameter Real Anzahl_der_Rollen = 2;
+
+Real Fz, Fg, Fd, s, h;
+
+equation
+
+Fz = fs_connector1.F;
+Fg = fs_connector2.F;
+Fd = fs_connector3.F;
+
+Fz = Fg/Anzahl_der_Rollen;
+Fd = Fz + Fg;
+
+s = fs_connector1.s;
+h = fs_connector2.s;
+
+s = Anzahl_der_Rollen * h;
+
+
+annotation(
+    Icon(graphics = {Ellipse(fillColor = {90, 90, 90}, fillPattern = FillPattern.Solid, extent = {{-50, 50}, {50, -50}}, endAngle = 360)}));end Rolle_einfach;
