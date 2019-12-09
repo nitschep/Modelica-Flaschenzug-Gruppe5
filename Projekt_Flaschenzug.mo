@@ -3058,9 +3058,20 @@ und simuliert werden können.</font><o:p></o:p></p>
         Placement(visible = true, transformation(origin = {-46, -8}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-40, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Projekt_Flaschenzug.Connectoren.Mw_connector mw_connector2 annotation(
         Placement(visible = true, transformation(origin = {66, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {58, -10}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    
+    parameter Real Hubrichtung = 1 "Hubrichtung --> Heben = 1 | Senken = -1";
+    
     equation
-      i * mw_connector2.omega = mw_connector1.omega;
-      i * mw_connector1.M_l = mw_connector2.M_l;
+    
+    if (Hubrichtung == 1 or Hubrichtung == -1) then
+      i * mw_connector2.omega = mw_connector1.omega * Hubrichtung;
+      i * mw_connector1.M_l = mw_connector2.M_l * Hubrichtung;
+    else
+      Modelica.Utilities.Streams.error("Hubrichtung falsch parametriert.\nBitte geben Sie einen gueltigen Wert fuer die Hubrichtung ein.");
+      i * mw_connector2.omega = mw_connector1.omega * Hubrichtung;
+      i * mw_connector1.M_l = mw_connector2.M_l * Hubrichtung;
+    end if;
+      
       annotation(
         Icon(graphics = {Rectangle(origin = {10, -11}, fillColor = {0, 170, 0}, fillPattern = FillPattern.Solid, extent = {{-48, 39}, {48, -39}}), Text(origin = {-5, -11}, extent = {{-9, 9}, {39, -11}}, textString = "Getriebe")}, coordinateSystem(initialScale = 0.1)));
     end Getriebe;
