@@ -349,8 +349,8 @@ package Projekt_Flaschenzug
 <p class=\"MsoNormal\">Diese Bibliothek enthält Komponenten zur Modellierung eines
 Flaschenzugsystems.&nbsp;</p><p class=\"MsoNormal\">Mit der Auswahl einer der Flaschenzugarten kann in
 Kombination mit den Antriebskomponenten, der Trommel, eines Gewichts und einem Fixpunkt, wie z.B. der Decke, das Flaschenzugsystem simuliert
-werden. In der Bibliothek sind für die unterschiedlichen Flaschenzugarten jeweils ein Beispiele vorhanden, um die Verwendung
-der Komponenten zu demonstrieren. Öffnen Sie einfach das entsprechende
+werden. In der Bibliothek sind für die unterschiedlichen Flaschenzugarten jeweils ein Beispiel vorhanden, um die Verwendung
+der Komponenten zu demonstrieren. Öffnen Sie das entsprechende
 Beispielmodell und simulieren Sie das Modell gemäß der darin vorliegenden Beschreibung.<o:p></o:p></p>
 
 <!--EndFragment--></body></html>", __OpenModelica_infoHeader = "<html><head></head><body>
@@ -707,71 +707,101 @@ mso-bidi-language:AR-SA\">Bedienanleitung für das Flaschenzugsystem</span></b><
 
     model Faktorenflaschenzug
       extends Modelica.Icons.Example;
-      Projekt_Flaschenzug.Antriebssystem antriebssystem1 annotation(
-        Placement(visible = true, transformation(origin = {-72, 10}, extent = {{-34, -34}, {34, 34}}, rotation = 0)));
       Projekt_Flaschenzug.Komponenten.Decke decke1 annotation(
-        Placement(visible = true, transformation(origin = {37, 109}, extent = {{-39, -39}, {39, 39}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {35, 105}, extent = {{-39, -39}, {39, 39}}, rotation = 0)));
       Projekt_Flaschenzug.Komponenten.Trommel trommel1 annotation(
-        Placement(visible = true, transformation(origin = {-20, 12}, extent = {{-24, -24}, {24, 24}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {-24, 22}, extent = {{-24, -24}, {24, 24}}, rotation = 0)));
       Projekt_Flaschenzug.Komponenten.Masse masse1 annotation(
-        Placement(visible = true, transformation(origin = {37, -45}, extent = {{-27, -27}, {27, 27}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {39, -85}, extent = {{-27, -27}, {27, 27}}, rotation = 0)));
       Projekt_Flaschenzug.Flaschenzugarten.Faktorenflaschenzug faktorenflaschenzug1 annotation(
-        Placement(visible = true, transformation(origin = {38, 22}, extent = {{-42, -42}, {42, 42}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {60, 4}, extent = {{-42, -42}, {42, 42}}, rotation = 0)));
+  Projekt_Flaschenzug.Antriebssystem.Motor motor1 annotation(
+        Placement(visible = true, transformation(origin = {-82, -82}, extent = {{-20, -20}, {36, 20}}, rotation = 0)));
+  Projekt_Flaschenzug.Antriebssystem.Bremse bremse1 annotation(
+        Placement(visible = true, transformation(origin = {-26, -48}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  Projekt_Flaschenzug.Antriebssystem.Getriebe getriebe1(Hubrichtung = 1)  annotation(
+        Placement(visible = true, transformation(origin = {-78, -2}, extent = {{-20, -20}, {28, 12}}, rotation = 0)));
     equation
-      connect(faktorenflaschenzug1.fs_connector3, decke1.fs_connector1) annotation(
-        Line(points = {{38, 62}, {38, 70}, {39, 70}, {39, 79}}));
-      connect(faktorenflaschenzug1.fs_connector2, masse1.fs_connector1) annotation(
-        Line(points = {{38, -19}, {38, -40}}));
-      connect(trommel1.fs_connector1, faktorenflaschenzug1.fs_connector1) annotation(
-        Line(points = {{-2, 19}, {9.5, 19}, {9.5, 20}, {17, 20}}));
-      connect(trommel1.mw_connector1, antriebssystem1.mw_connector1) annotation(
-        Line(points = {{-24, 10}, {-52, 10}}));
+      connect(bremse1.mw_connector2, getriebe1.mw_connector1) annotation(
+        Line(points = {{-36, -34}, {-96, -34}, {-96, -6}, {-94, -6}}));
+    connect(motor1.mw_connector1, bremse1.mw_connector1) annotation(
+        Line(points = {{-52, -82}, {-41, -82}, {-41, -62}}));
+    connect(motor1.u_connector1, bremse1.u_connector1) annotation(
+        Line(points = {{-62, -98}, {-13, -98}, {-13, -63}}));
+      connect(getriebe1.mw_connector2, trommel1.mw_connector1) annotation(
+        Line(points = {{-54, -6}, {-30, -6}, {-30, 22}, {-28, 22}}));
+    connect(trommel1.fs_connector1, faktorenflaschenzug1.fs_connector1) annotation(
+        Line(points = {{-7, 33}, {10, 33}, {10, 2}, {21, 2}}));
+    connect(faktorenflaschenzug1.fs_connector2, masse1.fs_connector1) annotation(
+        Line(points = {{35, -33}, {35, -76.4182}}));
+    connect(faktorenflaschenzug1.fs_connector3, decke1.fs_connector1) annotation(
+        Line(points = {{35, 41}, {36, 41}, {36, 50}}));
     end Faktorenflaschenzug;
 
     model Potenzflaschenzug
       extends Modelica.Icons.Example;
       Projekt_Flaschenzug.Flaschenzugarten.Potenzfalschenzug potenzfalschenzug1 annotation(
-        Placement(visible = true, transformation(origin = {34, 28}, extent = {{-58, -58}, {58, 58}}, rotation = 0)));
-      Projekt_Flaschenzug.Antriebssystem antriebssystem1 annotation(
-        Placement(visible = true, transformation(origin = {-96, -6}, extent = {{-36, -36}, {36, 36}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {54, 4}, extent = {{-58, -58}, {58, 58}}, rotation = 0)));
       Projekt_Flaschenzug.Komponenten.Trommel trommel1(d = 0.1) annotation(
-        Placement(visible = true, transformation(origin = {-46, -4}, extent = {{-24, -24}, {24, 24}}, rotation = 0)));
-      Projekt_Flaschenzug.Komponenten.Decke decke1 annotation(
-        Placement(visible = true, transformation(origin = {37, 105}, extent = {{-35, -35}, {35, 35}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {-48, 36}, extent = {{-24, -24}, {24, 24}}, rotation = 0)));
       Projekt_Flaschenzug.Komponenten.Masse masse1(m = 10) annotation(
-        Placement(visible = true, transformation(origin = {40, -46}, extent = {{-34, -34}, {34, 34}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {34, -92}, extent = {{-34, -34}, {34, 34}}, rotation = 0)));
+  Projekt_Flaschenzug.Komponenten.Decke decke1 annotation(
+        Placement(visible = true, transformation(origin = {29, 103}, extent = {{-35, -35}, {35, 35}}, rotation = 0)));
+  Projekt_Flaschenzug.Antriebssystem.Motor motor1 annotation(
+        Placement(visible = true, transformation(origin = {-82, -82}, extent = {{-20, -20}, {36, 20}}, rotation = 0)));
+  Projekt_Flaschenzug.Antriebssystem.Bremse bremse1 annotation(
+        Placement(visible = true, transformation(origin = {-36, -44}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
+  Projekt_Flaschenzug.Antriebssystem.Getriebe getriebe1 annotation(
+        Placement(visible = true, transformation(origin = {-80, -2}, extent = {{-20, -20}, {28, 12}}, rotation = 0)));
     equation
+    connect(getriebe1.mw_connector2, trommel1.mw_connector1) annotation(
+        Line(points = {{-56, -6}, {-53, -6}, {-53, 36}}));
+    connect(trommel1.fs_connector1, potenzfalschenzug1.fs_connector1) annotation(
+        Line(points = {{-31, 47}, {-14, 47}, {-14, -20}, {-2, -20}}));
+      connect(bremse1.mw_connector2, getriebe1.mw_connector1) annotation(
+        Line(points = {{-46, -30}, {-98, -30}, {-98, -6}, {-96, -6}}));
+      connect(motor1.u_connector1, bremse1.u_connector1) annotation(
+        Line(points = {{-62, -98}, {-22, -98}, {-22, -60}, {-24, -60}}));
+      connect(motor1.mw_connector1, bremse1.mw_connector1) annotation(
+        Line(points = {{-52, -82}, {-52, -82}, {-52, -58}, {-52, -58}}));
       connect(potenzfalschenzug1.fs_connector3, decke1.fs_connector1) annotation(
-        Line(points = {{35, 65}, {35, 70.5}, {38, 70.5}, {38, 78}}));
-      connect(antriebssystem1.mw_connector1, trommel1.mw_connector1) annotation(
-        Line(points = {{-79, -6}, {-50, -6}}));
-      connect(trommel1.fs_connector1, potenzfalschenzug1.fs_connector1) annotation(
-        Line(points = {{-28, 3}, {-11.5, 3}, {-11.5, 4}, {-12, 4}}));
-      connect(potenzfalschenzug1.fs_connector2, masse1.fs_connector1) annotation(
-        Line(points = {{43, -18}, {43, -28}, {42, -28}, {42, -39}}));
+        Line(points = {{30, 41}, {30, 53}}));
+      connect(masse1.fs_connector1, potenzfalschenzug1.fs_connector2) annotation(
+        Line(points = {{34, -64}, {34, -42}, {35, -42}}));
     end Potenzflaschenzug;
 
     model Differentialflaschenzug
       extends Modelica.Icons.Example;
       Projekt_Flaschenzug.Flaschenzugarten.Differentialflaschenzug differentialflaschenzug1 annotation(
-        Placement(visible = true, transformation(origin = {26, 12}, extent = {{-66, -66}, {66, 66}}, rotation = 0)));
-      Projekt_Flaschenzug.Antriebssystem antriebssystem1 annotation(
-        Placement(visible = true, transformation(origin = {-99, -1}, extent = {{-35, -35}, {35, 35}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {48, 12}, extent = {{-66, -66}, {66, 66}}, rotation = 0)));
       Projekt_Flaschenzug.Komponenten.Trommel trommel1 annotation(
-        Placement(visible = true, transformation(origin = {-52, 0}, extent = {{-22, -22}, {22, 22}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {-36, 0}, extent = {{-22, -22}, {22, 22}}, rotation = 0)));
       Projekt_Flaschenzug.Komponenten.Masse masse1 annotation(
-        Placement(visible = true, transformation(origin = {25, -73}, extent = {{-31, -31}, {31, 31}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {26, -93.85}, extent = {{-22, -8.8}, {22, 35.2}}, rotation = 0)));
       Projekt_Flaschenzug.Komponenten.Decke decke1 annotation(
-        Placement(visible = true, transformation(origin = {22, 106}, extent = {{-38, -38}, {38, 38}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {20, 122}, extent = {{-38, -38}, {38, 38}}, rotation = 0)));
+  Projekt_Flaschenzug.Antriebssystem.Motor motor1 annotation(
+        Placement(visible = true, transformation(origin = {-82, -82}, extent = {{-20, -20}, {36, 20}}, rotation = 0)));
+  Projekt_Flaschenzug.Antriebssystem.Getriebe getriebe1(Hubrichtung = -1)  annotation(
+        Placement(visible = true, transformation(origin = {-78, -26}, extent = {{-20, -20}, {28, 12}}, rotation = 0)));
+  Antriebssystem.Bremse bremse1 annotation(
+        Placement(visible = true, transformation(origin = {-26, -62}, extent = {{-20, -20}, {20, 20}}, rotation = 0)));
     equation
-      connect(trommel1.mw_connector1, antriebssystem1.mw_connector1) annotation(
-        Line(points = {{-56, -2}, {-82, -2}, {-82, -2}, {-82, -2}}));
+      connect(getriebe1.mw_connector2, trommel1.mw_connector1) annotation(
+        Line(points = {{-54, -30}, {-40, -30}, {-40, 0}, {-40, 0}}));
       connect(differentialflaschenzug1.fs_connector1, trommel1.fs_connector1) annotation(
-        Line(points = {{-14, 6}, {-36, 6}, {-36, 6}, {-36, 6}}));
-      connect(differentialflaschenzug1.fs_connector2, masse1.fs_connector1) annotation(
-        Line(points = {{28, -52}, {28, -52}, {28, -66}, {28, -66}}));
+        Line(points = {{-10, 0}, {-20, 0}, {-20, 10}}));
+      connect(bremse1.mw_connector2, getriebe1.mw_connector1) annotation(
+        Line(points = {{-36, -48}, {-94, -48}, {-94, -30}, {-94, -30}}));
+      connect(motor1.u_connector1, bremse1.u_connector1) annotation(
+        Line(points = {{-62, -98}, {-14, -98}, {-14, -78}, {-14, -78}}));
+      connect(motor1.mw_connector1, bremse1.mw_connector1) annotation(
+        Line(points = {{-52, -82}, {-42, -82}, {-42, -76}, {-42, -76}}));
+      connect(masse1.fs_connector1, differentialflaschenzug1.fs_connector2) annotation(
+        Line(points = {{26, -63}, {22, -63}, {22, -46}, {25, -46}}));
       connect(differentialflaschenzug1.fs_connector3, decke1.fs_connector1) annotation(
-        Line(points = {{26, 54}, {24, 54}, {24, 76}, {24, 76}}));
+        Line(points = {{23, 60}, {25, 60}, {25, 68}, {22, 68}}));
     end Differentialflaschenzug;
   end Beispiele;
   
@@ -800,7 +830,7 @@ mso-bidi-language:AR-SA\">Bedienanleitung für das Flaschenzugsystem</span></b><
       h = fs_connector2.s;
       s = Anzahl_der_Rollen * h;
      annotation(
-        Icon(graphics = {Ellipse(origin = {0, 70}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-15, 15}, {15, -15}}, endAngle = 360), Ellipse(origin = {0, -70}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-15, 15}, {15, -15}}, endAngle = 360), Ellipse(origin = {0, 30}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-10, 10}, {10, -10}}, endAngle = 360), Ellipse(origin = {0, -30}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-10, 10}, {10, -10}}, endAngle = 360), Rectangle(origin = {0, 52}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 40}, {2, -40}}), Rectangle(origin = {0, -60}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 30}, {2, -35}}), Line(points = {{15, 70}, {15, -70}}, color = {170, 170, 127}, thickness = 1), Line(points = {{-10, 30}, {-15, -70}}, color = {170, 170, 127}, thickness = 1), Line(points = {{10, 30}, {10, -30}}, color = {170, 170, 127}, thickness = 1), Ellipse(origin = {0, 9}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-4, 4}, {4, -4}}, endAngle = 360), Ellipse(origin = {0, 9}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-2, 2}, {2, -2}}, endAngle = 360), Line(points = {{0, 6.5}, {-10, -28}}, color = {170, 170, 127}, thickness = 1), Line(points = {{-13, 78}, {-50, 0}}, color = {170, 170, 127}, thickness = 1), Ellipse(origin = {0, 70}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {0, 30}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {0, -70}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {0, -30}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Text(origin = {50, 70}, extent = {{0, 0}, {80, 40}}, textString = "Faktorenflaschenzug"), Text(origin = {50, 50}, extent = {{0, 0}, {80, 40}}, textString = "Anzahl der Rollen"), Text(origin = {50, 30}, extent = {{0, 0}, {80, 40}}, textString = "%Anzahl_der_Rollen")}, coordinateSystem(initialScale = 0.1)),
+        Icon(graphics = {Ellipse(origin = {0, 70}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-15, 15}, {15, -15}}, endAngle = 360), Ellipse(origin = {0, -70}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-15, 15}, {15, -15}}, endAngle = 360), Ellipse(origin = {0, 30}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-10, 10}, {10, -10}}, endAngle = 360), Ellipse(origin = {0, -30}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-10, 10}, {10, -10}}, endAngle = 360), Rectangle(origin = {0, 52}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 40}, {2, -40}}), Rectangle(origin = {0, -60}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 30}, {2, -35}}), Line(points = {{15, 70}, {15, -70}}, color = {170, 170, 127}, thickness = 0.75), Line(points = {{-10, 30}, {-15, -70}}, color = {170, 170, 127}, thickness = 0.75), Line(points = {{10, 30}, {10, -30}}, color = {170, 170, 127}, thickness = 0.75), Ellipse(origin = {0, 9}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-4, 4}, {4, -4}}, endAngle = 360), Ellipse(origin = {0, 9}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-2, 2}, {2, -2}}, endAngle = 360), Line(points = {{0, 6.5}, {-10, -28}}, color = {170, 170, 127}, thickness = 0.75), Line(points = {{-13, 78}, {-50, 0}}, color = {170, 170, 127}, thickness = 0.75), Ellipse(origin = {0, 70}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {0, 30}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {0, -70}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {0, -30}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Text(origin = {110, 46}, extent = {{0, 0}, {80, 40}}, textString = "Faktorenflaschenzug"), Text(origin = {108, 4}, extent = {{0, 0}, {80, 40}}, textString = "Anzahl der Rollen:"), Text(origin = {112, -34}, extent = {{0, 0}, {80, 40}}, textString = "%Anzahl_der_Rollen")}, coordinateSystem(extent = {{-100, -110}, {200, 110}}, initialScale = 0.5)),
         Documentation(info = "<html><head></head><body>
 
 
@@ -1147,11 +1177,13 @@ mso-bidi-language:AR-SA\">Bedienanleitung für das Flaschenzugsystem</span></b><
 
 <p class=\"MsoListParagraph\"><font size=\"4\">Dabei handelt es sich um die einfachste Bauform eines
 Flaschenzugs. Dieser besteht aus einem festen und einem beweglichen
-Rollenpaket. Das feste Rollenpaket ist an einem Fixpunkt wie z.B der Decke
+Rollenpaket. Das feste (obere) Rollenpaket ist an einem Fixpunkt wie z.B der Decke
 befestigt während an dem unteren Rollenpaket die Last bzw. das Gewicht
 angebunden ist.</font><o:p></o:p></p>
 
-<!--EndFragment--></body></html>", __OpenModelica_infoHeader = "<html><head></head><body><font size=\"4\"><b>Faktorenflaschenzug</b></font></body></html>"));
+<!--EndFragment--></body></html>", __OpenModelica_infoHeader = "<html><head></head><body><font size=\"4\"><b>Faktorenflaschenzug</b></font></body></html>"),
+  Diagram(coordinateSystem(extent = {{-100, -110}, {200, 110}}, initialScale = 0.5)),
+  __OpenModelica_commandLineOptions = "");
     end Faktorenflaschenzug;
 
     model Potenzfalschenzug
@@ -1181,7 +1213,7 @@ angebunden ist.</font><o:p></o:p></p>
       s = 2 ^ Anzahl_der_Rollen * h;
       
     annotation(
-        Icon(graphics = {Ellipse(origin = {-30, 30}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-15, 15}, {15, -15}}, endAngle = 360), Ellipse(fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-15, 15}, {15, -15}}, endAngle = 360), Ellipse(origin = {15, -50}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-15, 15}, {15, -15}}, endAngle = 360), Rectangle(origin = {-30, 40}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 15}, {2, -10}}), Rectangle(origin = {0, -10}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 10}, {2, -15}}), Rectangle(origin = {15, -60}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 10}, {2, -15}}), Ellipse(origin = {0, -25}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-4, 4}, {4, -4}}, endAngle = 360), Rectangle(origin = {15, 40}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 15}, {2, -15}}), Rectangle(origin = {30, 40}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 15}, {2, -15}}), Ellipse(origin = {30, 25}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-4, 4}, {4, -4}}, endAngle = 360), Ellipse(origin = {15, 25}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-4, 4}, {4, -4}}, endAngle = 360), Ellipse(origin = {15, 25}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-2, 2}, {2, -2}}, endAngle = 360), Ellipse(origin = {30, 25}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-2, 2}, {2, -2}}, endAngle = 360), Ellipse(origin = {0, -25}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-2, 2}, {2, -2}}, endAngle = 360), Line(origin = {-30, 30}, points = {{15, 0}, {15, -30}}, color = {170, 170, 127}, thickness = 1), Line(origin = {-30, 30}, points = {{30, -57.5}, {30, -80}}, color = {170, 170, 127}, thickness = 1), Line(origin = {-30, 30}, points = {{45, -7.5}, {45, -30}}, color = {170, 170, 127}, thickness = 1), Line(origin = {-30, 30}, points = {{60, -7.5}, {60, -80}}, color = {170, 170, 127}, thickness = 1), Line(origin = {-30.11, 30.23}, points = {{-13, 7}, {-50, -70}}, color = {170, 170, 127}, thickness = 1), Rectangle(origin = {0, 57}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-32, 2}, {32, -2}}), Ellipse(origin = {-30, 30}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {15, -50}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Text(origin = {80, 40}, extent = {{0, 0}, {80, 40}}, textString = "Potenzflaschenzug"), Text(origin = {80, 20}, extent = {{0, 0}, {80, 40}}, textString = "Anzahl der Rollen"), Text(origin = {80, 0}, extent = {{0, 0}, {80, 40}}, textString = "%Anzahl_der_Rollen")}, coordinateSystem(initialScale = 0.1)),
+        Icon(graphics = {Ellipse(origin = {-30, 30}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-15, 15}, {15, -15}}, endAngle = 360), Ellipse(fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-15, 15}, {15, -15}}, endAngle = 360), Ellipse(origin = {15, -50}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-15, 15}, {15, -15}}, endAngle = 360), Rectangle(origin = {-30, 40}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 15}, {2, -10}}), Rectangle(origin = {0, -10}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 10}, {2, -15}}), Rectangle(origin = {15, -60}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 10}, {2, -15}}), Ellipse(origin = {0, -25}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-4, 4}, {4, -4}}, endAngle = 360), Rectangle(origin = {15, 40}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 15}, {2, -15}}), Rectangle(origin = {30, 40}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 15}, {2, -15}}), Ellipse(origin = {30, 25}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-4, 4}, {4, -4}}, endAngle = 360), Ellipse(origin = {15, 25}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-4, 4}, {4, -4}}, endAngle = 360), Ellipse(origin = {15, 25}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-2, 2}, {2, -2}}, endAngle = 360), Ellipse(origin = {30, 25}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-2, 2}, {2, -2}}, endAngle = 360), Ellipse(origin = {0, -25}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-2, 2}, {2, -2}}, endAngle = 360), Line(origin = {-30, 30.27}, points = {{15, 0}, {15, -30}}, color = {170, 170, 127}, thickness = 0.75), Line(origin = {-30, 30}, points = {{30, -57.5}, {30, -80}}, color = {170, 170, 127}, thickness = 1), Line(origin = {-30, 30}, points = {{45, -7.5}, {45, -30}}, color = {170, 170, 127}, thickness = 1), Line(origin = {-30, 30}, points = {{60, -7.5}, {60, -80}}, color = {170, 170, 127}, thickness = 1), Line(origin = {-30.11, 30.23}, points = {{-13, 7}, {-50, -70}}, color = {170, 170, 127}, thickness = 0.75), Rectangle(origin = {0, 57}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-32, 2}, {32, -2}}), Ellipse(origin = {-30, 30}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {15, -50}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Text(origin = {120, 14}, extent = {{0, 0}, {70, 40}}, textString = "Potenzflaschenzug"), Text(origin = {118, -18}, extent = {{0, 0}, {80, 40}}, textString = "Anzahl der Rollen:"), Text(origin = {120, -54}, extent = {{0, 0}, {70, 40}}, textString = "%Anzahl_der_Rollen")}, coordinateSystem(extent = {{-100, -100}, {200, 100}}, initialScale = 0.5)),
         Documentation(info = "<html><head></head><body>
 
 
@@ -1880,7 +1912,9 @@ an der Decke befestigten Rolle, damit die Zugkraft reduziert wird.</font><o:p></
 mso-ascii-theme-font:minor-latin;mso-fareast-font-family:Calibri;mso-fareast-theme-font:
 minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:&quot;Times New Roman&quot;;
 mso-bidi-theme-font:minor-bidi;mso-ansi-language:DE;mso-fareast-language:EN-US;
-mso-bidi-language:AR-SA\">Potenzflaschenzug</span></b><!--EndFragment--></body></html>"));
+mso-bidi-language:AR-SA\">Potenzflaschenzug</span></b><!--EndFragment--></body></html>"),
+  Diagram(coordinateSystem(extent = {{-100, -100}, {200, 100}}, initialScale = 0.5)),
+  __OpenModelica_commandLineOptions = "");
    end Potenzfalschenzug;
 
   model Differentialflaschenzug
@@ -1894,11 +1928,11 @@ mso-bidi-language:AR-SA\">Potenzflaschenzug</span></b><!--EndFragment--></body><
      constant Real pi = 2*Modelica.Math.asin(1.0);
   
      Projekt_Flaschenzug.Connectoren.Fs_connector fs_connector1 annotation(
-    Placement(visible = true, transformation(origin = {-52, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-62, -8}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {-52, 2}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-74, -18}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
      Projekt_Flaschenzug.Connectoren.Fs_connector fs_connector2 annotation(
-    Placement(visible = true, transformation(origin = {14, -84}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {4, -96}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {14, -84}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {4, -88}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
      Projekt_Flaschenzug.Connectoren.Fs_connector fs_connector3 annotation(
-    Placement(visible = true, transformation(origin = {-4, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 64}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Placement(visible = true, transformation(origin = {-4, 70}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {0, 72}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
   equation
      Fz = fs_connector1.F;
      Fg = fs_connector2.F;
@@ -1910,7 +1944,7 @@ mso-bidi-language:AR-SA\">Potenzflaschenzug</span></b><!--EndFragment--></body><
      h = (2*pi*Durchmesser_grosse_Rolle - 2*pi*Durchmesser_kleine_Rolle) / 2 * s;
   
     annotation(
-    Icon(graphics = {Ellipse(origin = {0, 25}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-25, 25}, {25, -25}}, endAngle = 360), Ellipse(origin = {0, 25}, fillColor = {177, 177, 177}, fillPattern = FillPattern.Solid, extent = {{-15, 15}, {15, -15}}, endAngle = 360), Ellipse(origin = {5, -60}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-20, 20}, {20, -20}}, endAngle = 360), Rectangle(origin = {0, 50}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 10}, {2, -25}}), Ellipse(origin = {0, 25}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Rectangle(origin = {5, -70}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 10}, {2, -25}}), Ellipse(origin = {5, -60}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Line(points = {{-15, 25}, {-15, -60}}, color = {170, 170, 127}, thickness = 1), Line(points = {{25, 25}, {25, -60}}, color = {170, 170, 127}, thickness = 1), Line(points = {{-19, 41.3}, {-100, -50}, {8, 12.3}}, color = {170, 170, 127}, thickness = 1, smooth = Smooth.Bezier), Text(origin = {80, 20}, extent = {{0, 0}, {80, 40}}, textString = "Differentialflaschenzug"),   Text(origin = {60, -16}, extent = {{24, 8}, {80, 40}}, textString = "%Durchmesser_kleine_Rolle"), Text(origin = {64, 0}, extent = {{16, 12}, {80, 40}}, textString = "%Durchmesser_grosse_Rolle")}, coordinateSystem(initialScale = 0.1)),
+    Icon(graphics = {Ellipse(origin = {0, 33}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-25, 25}, {25, -25}}, endAngle = 360), Ellipse(origin = {0, 33}, fillColor = {177, 177, 177}, fillPattern = FillPattern.Solid, extent = {{-15, 15}, {15, -15}}, endAngle = 360), Ellipse(origin = {5, -52}, fillColor = {143, 143, 143}, fillPattern = FillPattern.Solid, extent = {{-20, 20}, {20, -20}}, endAngle = 360), Rectangle(origin = {0, 58}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 10}, {2, -25}}), Ellipse(origin = {0, 33}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Rectangle(origin = {5, -62}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-2, 10}, {2, -25}}), Ellipse(origin = {5, -52}, fillColor = {89, 89, 89}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Line(origin = {0, 7.79}, points = {{-15, 25}, {-15, -60}}, color = {170, 170, 127}, thickness = 0.75), Line(origin = {0, 7.79}, points = {{25, 25}, {25, -60}}, color = {170, 170, 127}, thickness = 0.75), Line(origin = {0, 7.79}, points = {{-19, 41.3}, {-100, -50}, {8, 12.3}}, color = {170, 170, 127}, thickness = 0.5, smooth = Smooth.Bezier), Text(origin = {118, 32}, extent = {{0, 0}, {80, 40}}, textString = "Differentialflaschenzug"), Text(origin = {114, -30}, extent = {{14, 8}, {70, 40}}, textString = "Rolle unten d = %Durchmesser_kleine_Rolle"), Text(origin = {102, -4}, extent = {{16, 12}, {80, 40}}, textString = "Rolle oben d = %Durchmesser_grosse_Rolle")}, coordinateSystem(extent = {{-100, -100}, {200, 100}}, initialScale = 0.5)),
     Documentation(info = "<html><head></head><body>
 
 
@@ -2609,7 +2643,9 @@ mso-fareast-language:EN-US;}
 mso-ascii-theme-font:minor-latin;mso-fareast-font-family:Calibri;mso-fareast-theme-font:
 minor-latin;mso-hansi-theme-font:minor-latin;mso-bidi-font-family:&quot;Times New Roman&quot;;
 mso-bidi-theme-font:minor-bidi;mso-ansi-language:DE;mso-fareast-language:EN-US;
-mso-bidi-language:AR-SA\">Differentialflaschenzug</span></b><!--EndFragment--></body></html>"));
+mso-bidi-language:AR-SA\">Differentialflaschenzug</span></b><!--EndFragment--></body></html>"),
+ Diagram(coordinateSystem(extent = {{-100, -100}, {200, 100}}, initialScale = 0.5)),
+ __OpenModelica_commandLineOptions = "");
 
  end Differentialflaschenzug;
    
@@ -2961,7 +2997,7 @@ mso-bidi-language:AR-SA\">Differentialflaschenzug</span></b><!--EndFragment--></
 
 <p class=\"MsoNormal\"><font size=\"4\">Grundlegend besteht ein Flaschenzug aus Rollen und Seilen.
 Diese können unterschiedlich angeordnet und verbunden werden. Somit ergeben
-sich mehrere Flaschenzugarten, wovon im Flaschenzugsystem drei verschiedene umgesetzt
+sich verschiedene Flaschenzugarten, wovon im Flaschenzugsystem drei Varianten umgesetzt
 und simuliert werden können.</font><o:p></o:p></p>
 
 <!--EndFragment--></body></html>"));
@@ -2974,7 +3010,9 @@ und simuliert werden können.</font><o:p></o:p></p>
     equation
       fs_connector1.s = 0;
       annotation(
-        Icon(graphics = {Rectangle(origin = {-1, -58}, fillColor = {195, 198, 200}, fillPattern = FillPattern.Solid, lineThickness = 0.7, extent = {{-97, 30}, {101, -12}}), Line(origin = {-89.3582, -18.6443}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {-71.2089, -18.3607}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {-50.8656, -18.3607}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {-31.4626, -18.704}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {-11.1193, -18.7339}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {8.91055, -18.1369}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {28.9404, -18.4802}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {49.2837, -18.1966}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {68.0599, -18.5399}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {88.0897, -18.2563}, points = {{-8, -9}, {2, 3}}, thickness = 1), Text(origin = {18, -55}, extent = {{-104, 21}, {68, -9}}, textString = "Decke")}, coordinateSystem(initialScale = 0.1)));
+        Icon(graphics = {Rectangle(origin = {-1, -58}, fillColor = {195, 198, 200}, fillPattern = FillPattern.Solid, lineThickness = 0.7, extent = {{-97, 30}, {101, -12}}), Line(origin = {-89.3582, -18.6443}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {-71.2089, -18.3607}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {-50.8656, -18.3607}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {-31.4626, -18.704}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {-11.1193, -18.7339}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {8.91055, -18.1369}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {28.9404, -18.4802}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {49.2837, -18.1966}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {68.0599, -18.5399}, points = {{-8, -9}, {2, 3}}, thickness = 1), Line(origin = {88.0897, -18.2563}, points = {{-8, -9}, {2, 3}}, thickness = 1), Text(origin = {18, -55}, extent = {{-104, 21}, {68, -9}}, textString = "Decke")}, coordinateSystem(extent = {{-100, -100}, {100, 0}}, initialScale = 0.3)),
+        Diagram(coordinateSystem(extent = {{-100, -100}, {100, 0}}, initialScale = 0.3)),
+        __OpenModelica_commandLineOptions = "");
     end Decke;
 
     model Trommel
@@ -2982,15 +3020,17 @@ und simuliert werden können.</font><o:p></o:p></p>
       constant Real pi = 2 * Modelica.Math.asin(1.0);
       Modelica.SIunits.Velocity vu "Umfangsgeschw. der Trommel";
       Projekt_Flaschenzug.Connectoren.Fs_connector fs_connector1 annotation(
-        Placement(visible = true, transformation(origin = {72, 26}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {76, 30}, extent = {{-18, -18}, {18, 18}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {72, 26}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {72, 38}, extent = {{-18, -18}, {18, 18}}, rotation = 0)));
       Projekt_Flaschenzug.Connectoren.Mw_connector mw_connector1 annotation(
-        Placement(visible = true, transformation(origin = {-22, -6}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-15, -7}, extent = {{-21, -21}, {21, 21}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {-22, -6}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-19, 1}, extent = {{-21, -21}, {21, 21}}, rotation = 0)));
     equation
       vu = pi * d * mw_connector1.omega;
       der(fs_connector1.s) = vu;
       mw_connector1.M_l / d / 2 = fs_connector1.F;
       annotation(
-        Icon(graphics = {Ellipse(origin = {-43, 24}, fillColor = {195, 198, 200}, fillPattern = FillPattern.Solid, lineThickness = 0.7, extent = {{-51, 42}, {103, -106}}, endAngle = 360), Rectangle(origin = {26, 31}, rotation = 90, fillColor = {125, 121, 121}, fillPattern = FillPattern.Forward, lineThickness = 0.5, extent = {{-2, 39}, {2, -39}}), Ellipse(origin = {-13, -4}, fillColor = {195, 198, 200}, fillPattern = FillPattern.Solid, lineThickness = 0.7, extent = {{-51, 42}, {43, -50}}, endAngle = 360)}, coordinateSystem(initialScale = 0.1)));
+        Icon(graphics = {Ellipse(origin = {-47, 32}, fillColor = {195, 198, 200}, fillPattern = FillPattern.Solid, lineThickness = 0.7, extent = {{-51, 42}, {103, -106}}, endAngle = 360), Rectangle(origin = {22, 39}, rotation = 90, fillColor = {125, 121, 121}, fillPattern = FillPattern.Forward, lineThickness = 0.5, extent = {{-2, 39}, {2, -39}}), Ellipse(origin = {-17, 4}, fillColor = {195, 198, 200}, fillPattern = FillPattern.Solid, lineThickness = 0.7, extent = {{-51, 42}, {43, -50}}, endAngle = 360)}, coordinateSystem(extent = {{-100, -80}, {100, 80}}, initialScale = 0.2)),
+        Diagram(coordinateSystem(extent = {{-100, -80}, {100, 80}}, initialScale = 0.2)),
+        __OpenModelica_commandLineOptions = "");
     end Trommel;
 
     model Masse
@@ -2999,14 +3039,15 @@ und simuliert werden können.</font><o:p></o:p></p>
       Modelica.SIunits.Velocity v_masse "Geschw. der Masse";
       Modelica.SIunits.Acceleration a_masse "Beschleunigung der Masse";
       Projekt_Flaschenzug.Connectoren.Fs_connector fs_connector1 annotation(
-        Placement(visible = true, transformation(origin = {4, 22}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {11, 23}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {4, 22}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-1, 81}, extent = {{-15, -15}, {15, 15}}, rotation = 0)));
     equation
       fs_connector1.F = m * g + m * a_masse;
       v_masse = der(fs_connector1.s);
       der(v_masse) = a_masse;
       annotation(
-        Icon(graphics = {Polygon(origin = {8, -31}, fillColor = {195, 198, 200}, fillPattern = FillPattern.Solid, lineThickness = 0.7, points = {{-82, 17}, {-40, 47}, {40, 45}, {82, 15}, {62, -47}, {-62, -47}, {-68, -31}, {-82, 17}}), Text(origin = {10, -33}, extent = {{-48, 17}, {48, -17}}, textString = "Masse = %m kg")}, coordinateSystem(initialScale = 0.1)),
-        Diagram(coordinateSystem(initialScale = 0.1)));
+        Icon(graphics = {Polygon(origin = {-4, 27}, fillColor = {195, 198, 200}, fillPattern = FillPattern.Solid, lineThickness = 0.7, points = {{-82, 17}, {-40, 47}, {40, 47}, {82, 17}, {62, -47}, {-62, -47}, {-66, -31}, {-82, 17}}), Text(origin = {6, 25}, extent = {{-48, 17}, {32, -5}}, textString = "Masse = %m kg")}, coordinateSystem(initialScale = 0.3, extent = {{-100, -25}, {100, 100}})),
+        Diagram(coordinateSystem(initialScale = 0.3, extent = {{-100, -25}, {100, 100}})),
+        __OpenModelica_commandLineOptions = "");
     end Masse;
     annotation(
       Icon(graphics = {Rectangle(origin = {2, 35}, fillColor = {167, 167, 167}, fillPattern = FillPattern.Solid, extent = {{-66, 13}, {66, -13}}), Polygon(origin = {-35, -27}, fillColor = {147, 147, 147}, fillPattern = FillPattern.Solid, points = {{-35, -21}, {-3, 21}, {35, -21}, {35, -21}, {-35, -21}}), Ellipse(origin = {46, -24}, fillColor = {163, 163, 163}, fillPattern = FillPattern.Solid, extent = {{-28, 24}, {28, -24}}, endAngle = 360)}));
@@ -3031,7 +3072,7 @@ und simuliert werden können.</font><o:p></o:p></p>
       Projekt_Flaschenzug.Connectoren.Mw_connector mw_connector1 annotation(
         Placement(visible = true, transformation(origin = {86, -4}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {74, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Projekt_Flaschenzug.Connectoren.U_connector u_connector1 annotation(
-        Placement(visible = true, transformation(origin = {58, -44}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {49, -43}, extent = {{-41, -41}, {41, 41}}, rotation = 0)));
+        Placement(visible = true, transformation(origin = {58, -44}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {52, -40}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     equation
       if time < 1 then
         U = 0;
@@ -3049,7 +3090,9 @@ und simuliert werden können.</font><o:p></o:p></p>
       mw_connector1.omega = omega;
       U = u_connector1.U;
       annotation(
-        Icon(graphics = {Rectangle(origin = {3, -3}, fillColor = {218, 36, 61}, fillPattern = FillPattern.Vertical, extent = {{-47, 41}, {47, -41}}), Text(origin = {2, -1}, extent = {{-28, 15}, {28, -15}}, textString = "MOTOR"), Rectangle(origin = {71, -2}, fillColor = {21, 21, 21}, fillPattern = FillPattern.Solid, extent = {{-21, 16}, {-1, -14}}), Rectangle(origin = {72, -1}, fillColor = {29, 29, 29}, fillPattern = FillPattern.Solid, extent = {{-2, 21}, {2, -21}})}, coordinateSystem(initialScale = 0.1)));
+        Icon(graphics = {Rectangle(origin = {3, -3}, fillColor = {218, 36, 61}, fillPattern = FillPattern.Vertical, extent = {{-47, 41}, {47, -41}}), Text(origin = {2, -1}, extent = {{-28, 15}, {28, -15}}, textString = "MOTOR"), Rectangle(origin = {71, -2}, fillColor = {21, 21, 21}, fillPattern = FillPattern.Solid, extent = {{-21, 16}, {-1, -14}}), Rectangle(origin = {72, -1}, fillColor = {29, 29, 29}, fillPattern = FillPattern.Solid, extent = {{-2, 21}, {2, -21}})}, coordinateSystem(initialScale = 0.4, extent = {{-50, -50}, {90, 50}})),
+        Diagram(coordinateSystem(extent = {{-50, -50}, {90, 50}}, initialScale = 0.4)),
+        __OpenModelica_commandLineOptions = "");
     end Motor;
 
     model Getriebe
@@ -3073,7 +3116,9 @@ und simuliert werden können.</font><o:p></o:p></p>
     end if;
       
       annotation(
-        Icon(graphics = {Rectangle(origin = {10, -11}, fillColor = {0, 170, 0}, fillPattern = FillPattern.Solid, extent = {{-48, 39}, {48, -39}}), Text(origin = {-5, -11}, extent = {{-9, 9}, {39, -11}}, textString = "Getriebe")}, coordinateSystem(initialScale = 0.1)));
+        Icon(graphics = {Rectangle(origin = {10, -11}, fillColor = {0, 170, 0}, fillPattern = FillPattern.Solid, extent = {{-48, 39}, {48, -39}}), Text(origin = {-5, -11}, extent = {{-9, 9}, {39, -11}}, textString = "Getriebe")}, coordinateSystem(initialScale = 0.4, extent = {{-50, -50}, {70, 30}})),
+        Diagram(coordinateSystem(initialScale = 0.4, extent = {{-50, -50}, {70, 30}})),
+        __OpenModelica_commandLineOptions = "");
     end Getriebe;
 
     model Bremse
@@ -3082,8 +3127,8 @@ und simuliert werden können.</font><o:p></o:p></p>
         Placement(visible = true, transformation(origin = {-44, -36}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-38, -34}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
       Projekt_Flaschenzug.Connectoren.Mw_connector mw_connector2 annotation(
         Placement(visible = true, transformation(origin = {-42, 38}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-24, 36}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-      Projekt_Flaschenzug.Connectoren.U_connector u_connector1 annotation(
-        Placement(visible = true, transformation(origin = {34, -58}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {29, -37}, extent = {{-27, -27}, {27, 27}}, rotation = 0)));
+  Projekt_Flaschenzug.Connectoren.U_connector u_connector1 annotation(
+        Placement(visible = true, transformation(origin = {30, -40}, extent = {{-8, -8}, {8, 8}}, rotation = 0), iconTransformation(origin = {32, -38}, extent = {{-8, -8}, {8, 8}}, rotation = 0)));
     equation
       if u_connector1.U == 0 then
         mw_connector1.M_l + M_b + mw_connector2.M_l = 0;
@@ -3095,26 +3140,28 @@ und simuliert werden können.</font><o:p></o:p></p>
       mw_connector1.omega = mw_connector2.omega;
       u_connector1.U_a = 1;
       annotation(
-        Icon(graphics = {Ellipse(fillColor = {115, 115, 115}, fillPattern = FillPattern.Solid, extent = {{-40, 42}, {40, -42}}, endAngle = 360), Polygon(origin = {29, 0}, rotation = -90, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid, points = {{-47, -14}, {-33, 14}, {29, 14}, {47, -14}, {45, -14}, {-47, -14}}), Ellipse(fillPattern = FillPattern.Solid, extent = {{-6, 6}, {6, -6}}, endAngle = 360), Ellipse(origin = {-19, 27}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {-31, 3}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {-25, -21}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {-3, -33}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {1, 35}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Text(origin = {33, 5}, rotation = -90, fillPattern = FillPattern.Solid, extent = {{-17, 11}, {23, -19}}, textString = "Brembo")}, coordinateSystem(initialScale = 0.1)));
+        Icon(graphics = {Ellipse(fillColor = {115, 115, 115}, fillPattern = FillPattern.Solid, extent = {{-40, 42}, {40, -42}}, endAngle = 360), Polygon(origin = {29, 0}, rotation = -90, fillColor = {255, 255, 0}, fillPattern = FillPattern.Solid, points = {{-47, -14}, {-33, 14}, {29, 14}, {47, -14}, {45, -14}, {-47, -14}}), Ellipse(fillPattern = FillPattern.Solid, extent = {{-6, 6}, {6, -6}}, endAngle = 360), Ellipse(origin = {-19, 27}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {-31, 3}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {-25, -21}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {-3, -33}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Ellipse(origin = {1, 35}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-3, 3}, {3, -3}}, endAngle = 360), Text(origin = {33, 5}, rotation = -90, fillPattern = FillPattern.Solid, extent = {{-17, 11}, {23, -19}}, textString = "Brembo")}, coordinateSystem(initialScale = 0.4, extent = {{-50, -50}, {50, 50}})),
+        Diagram(coordinateSystem(extent = {{-50, -50}, {50, 50}}, initialScale = 0.4)),
+        __OpenModelica_commandLineOptions = "");
     end Bremse;
 
     Projekt_Flaschenzug.Antriebssystem.Motor motor1 annotation(
-      Placement(visible = true, transformation(origin = {-71, -29}, extent = {{-39, -39}, {39, 39}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {-67, -67}, extent = {{-39, -39}, {39, 39}}, rotation = 0)));
     Projekt_Flaschenzug.Antriebssystem.Getriebe getriebe1 annotation(
-      Placement(visible = true, transformation(origin = {16, 48}, extent = {{-54, -54}, {54, 54}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {38, 78}, extent = {{-54, -54}, {54, 54}}, rotation = 0)));
     Projekt_Flaschenzug.Antriebssystem.Bremse bremse1 annotation(
-      Placement(visible = true, transformation(origin = {-6, -12}, extent = {{-50, -50}, {50, 50}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {52, -40}, extent = {{-50, -50}, {50, 50}}, rotation = 0)));
     Projekt_Flaschenzug.Connectoren.Mw_connector mw_connector1 annotation(
-      Placement(visible = true, transformation(origin = {70, 64}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {47, -1}, extent = {{-17, -17}, {17, 17}}, rotation = 0)));
+      Placement(visible = true, transformation(origin = {150, 68}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {47, -1}, extent = {{-17, -17}, {17, 17}}, rotation = 0)));
   equation
-    connect(bremse1.mw_connector2, getriebe1.mw_connector1) annotation(
-      Line(points = {{-18, 6}, {-18, 43}, {-6, 43}}));
-    connect(motor1.mw_connector1, bremse1.mw_connector1) annotation(
-      Line(points = {{-42, -29}, {-25, -29}}));
     connect(motor1.u_connector1, bremse1.u_connector1) annotation(
-      Line(points = {{-52, -46}, {8.5, -46}, {8.5, -30.5}}));
+      Line(points = {{-46, -98}, {84, -98}, {84, -78}, {84, -78}}));
+    connect(motor1.mw_connector1, bremse1.mw_connector1) annotation(
+      Line(points = {{-34, -67}, {-33.5, -67}, {-33.5, -74}, {14, -74}}));
+    connect(bremse1.mw_connector2, getriebe1.mw_connector1) annotation(
+      Line(points = {{28, -4}, {28, 12.5}, {-2, 12.5}, {-2, 69}}));
     connect(mw_connector1, getriebe1.mw_connector2) annotation(
-      Line(points = {{70, 64}, {70, 43}, {47, 43}}));
+      Line(points = {{150, 68}, {150, 69}, {86, 69}}));
     annotation(
       Icon(graphics = {Rectangle(origin = {0, -3}, fillPattern = FillPattern.Solid, extent = {{-48, 43}, {48, -43}})}));
   end Antriebssystem;
@@ -3124,7 +3171,7 @@ und simuliert werden können.</font><o:p></o:p></p>
       flow Modelica.SIunits.Force F "Kraft";
       Modelica.SIunits.Length s "Weg";
       annotation(
-        Icon(graphics = {Ellipse(origin = {4, 2}, fillColor = {0, 0, 255}, fillPattern = FillPattern.Solid, extent = {{-104, 98}, {96, -90}}, endAngle = 360), Text(origin = {-14, 21}, extent = {{-34, 33}, {70, -53}}, textString = "F s")}),
+        Icon(graphics = {Ellipse(origin = {4, 2}, fillColor = {0, 0, 255}, fillPattern = FillPattern.Solid, extent = {{-104, 98}, {96, -90}}, endAngle = 360), Text(origin = {-54, 45}, extent = {{-34, 33}, {148, -103}}, textString = "F s")}, coordinateSystem(initialScale = 0.1)),
         Documentation(info = "<html><head></head><body>
 
 
@@ -3828,7 +3875,7 @@ mso-ansi-language:DE;mso-fareast-language:EN-US;mso-bidi-language:AR-SA\"><b>Kra
       flow Modelica.SIunits.Torque M_l "Lastmoment";
       Modelica.SIunits.AngularVelocity omega "Winkelgeschwindigkeit";
       annotation(
-        Icon(graphics = {Ellipse(origin = {66, -60}, fillColor = {170, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-164, 156}, {34, -36}}, endAngle = 360), Text(origin = {-24, 20}, extent = {{-22, 16}, {72, -46}}, textString = "M w")}, coordinateSystem(initialScale = 0.1)),
+        Icon(graphics = {Ellipse(origin = {66, -60}, fillColor = {170, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-164, 156}, {34, -36}}, endAngle = 360), Text(origin = {-58, 42}, extent = {{-22, 16}, {144, -94}}, textString = "M w")}),
         Documentation(info = "<html><head></head><body>
 
 
@@ -4524,14 +4571,16 @@ wird das Moment als Flussgröße und die Drehzahl als Potential definiert.<o:p><
 font-family:&quot;Calibri&quot;,&quot;sans-serif&quot;;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:
 Calibri;mso-fareast-theme-font:minor-latin;mso-hansi-theme-font:minor-latin;
 mso-bidi-font-family:&quot;Times New Roman&quot;;mso-bidi-theme-font:minor-bidi;
-mso-ansi-language:DE;mso-fareast-language:EN-US;mso-bidi-language:AR-SA\"><b>Moment-Drehzahl-Connector&nbsp;</b></span><!--EndFragment--></body></html>"));
+mso-ansi-language:DE;mso-fareast-language:EN-US;mso-bidi-language:AR-SA\"><b>Moment-Drehzahl-Connector&nbsp;</b></span><!--EndFragment--></body></html>"),
+  Diagram,
+  __OpenModelica_commandLineOptions = "");
     end Mw_connector;
 
     connector U_connector
       Modelica.SIunits.Voltage U "Versorgungsspannung";
       flow Modelica.SIunits.Voltage U_a "Ankerspannung";
       annotation(
-        Icon(graphics = {Ellipse(origin = {-3, 7}, fillColor = {0, 0, 127}, fillPattern = FillPattern.Solid, extent = {{-13, 13}, {25, -23}}, endAngle = 360), Text(origin = {-13, 17}, extent = {{-13, 5}, {45, -37}}, textString = "U")}),
+        Icon(graphics = {Ellipse(fillColor = {0, 0, 127}, fillPattern = FillPattern.Solid, extent = {{-20, 20}, {20, -20}}, endAngle = 360), Text(origin = {-17, 17}, extent = {{-13, 5}, {45, -37}}, textString = "U")}, coordinateSystem(extent = {{-20, -20}, {20, 20}}, initialScale = 0.4)),
         Documentation(info = "<html><head></head><body>
 
 
@@ -4880,7 +4929,9 @@ Calibri;mso-fareast-theme-font:minor-latin;mso-hansi-theme-font:minor-latin;
 mso-bidi-font-family:&quot;Times New Roman&quot;;mso-bidi-theme-font:minor-bidi;
 mso-ansi-language:DE;mso-fareast-language:EN-US;mso-bidi-language:AR-SA\">Der <b>U_connector </b>wird benötigt um der Bremse
 ein Signal vom Motor zu übergeben. Im Fall eines unbestromten Motors soll sich
-die Bremse schließen und somit das Flaschenzugsystem im Stillstand halten.</span><!--EndFragment--></body></html>", __OpenModelica_infoHeader = "<html><head></head><body><b><font size=\"4\">Spannungssignal-Connector</font></b></body></html>"));
+die Bremse schließen und somit das Flaschenzugsystem im Stillstand halten.</span><!--EndFragment--></body></html>", __OpenModelica_infoHeader = "<html><head></head><body><b><font size=\"4\">Spannungssignal-Connector</font></b></body></html>"),
+  Diagram(coordinateSystem(extent = {{-20, -20}, {20, 20}}, initialScale = 0.4)),
+  __OpenModelica_commandLineOptions = "");
     end U_connector;
     annotation(
       Icon(graphics = {Ellipse(origin = {-19, 19}, fillPattern = FillPattern.Solid, extent = {{-35, 43}, {73, -85}}, endAngle = 360), Rectangle(origin = {1, 46}, fillPattern = FillPattern.Solid, extent = {{-55, 16}, {53, -52}}), Rectangle(origin = {2, -77}, fillPattern = FillPattern.Solid, extent = {{-4, 21}, {4, -21}}), Rectangle(origin = {-24, 59}, fillPattern = FillPattern.Solid, extent = {{-12, 25}, {4, -21}}), Rectangle(origin = {32, 59}, fillPattern = FillPattern.Solid, extent = {{-12, 25}, {4, -21}})}),
